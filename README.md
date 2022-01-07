@@ -30,3 +30,13 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
+
+Name of feature: Weather Placeholder Data
+
+Estimate of time needed to complete: 2hours
+
+Start time: 10:19pm
+
+Finish time: 
+
+Actual time needed to complete: 
