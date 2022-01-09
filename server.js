@@ -15,8 +15,8 @@ app.get('/', (request, response) => {
 });
 
 app.get('/weather', (req, res) => {
-  // const lat = req.query.lat;
-  // const lon = req.query.lon;
+  const lat = req.query.lat;
+  const lon = req.query.lon;
   const query = req.query.query || "Seattle";
   const cityData = weatherData.find(city => city.city_name.toLowerCase() === query.toLowerCase());
   console.log(cityData);
