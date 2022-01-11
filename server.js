@@ -29,12 +29,13 @@ app.get('/weather', async (request, response) => {
   }
 });
 
-// app.get('/movies', async (request, response) {
-// let searchQuery = request.query.searchQuery;
-// const url = `https://api.themoviedb.org`
-// const movieData = await axios.get(url);
-// const moveArr = movieData.data.results.map(movie => new Movie(movie));
-// })
+app.get('/movies', async (request, response) => {
+let searchQuery = request.query.searchQuery;
+const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchQuery}`
+const movieData = await axios.get(url);
+const moveArr = movieData.data.results.map(movie => new Movie(movie));
+response.status(200).send(moveArr);
+})
 
 function handleError(error, response) {
   console.log(error);
@@ -54,14 +55,16 @@ class Forecast {
   }
 }
 
-// class Movie {
-//   constructor(movie) {
-//     this.title = movie.original_title;
-//     this.overview = movie.overview;
-//     this.averageVotes = movie.vote_average;
-//     this.totalVotes = movie.vote_count;
-//     this.imageUrl =  'https://image.tmbd.org/t/p'
-//   }
-// }
+class Movie {
+  constructor(movie) {
+    this.title = movie.original_title;
+    this.overview = movie.overview;
+    this.averageVotes = movie.vote_average;
+    this.totalVotes = movie.vote_count;
+    this.imageUrl =  'https://image.tmbd.org/t/p/w500'+ movie.poster_path;
+    this.popularity = movie.popularity;
+    this.releasedOn = movie.released_on;
+  }
+}
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
