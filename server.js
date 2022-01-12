@@ -16,14 +16,15 @@ app.get('/', (request, response) => {
 
 app.get('/weather', getWeather);
 
-function getWeather(request, response) {
+async function getWeather(request, response) {
   const lat = request.query.lat;
   const lon = request.query.lon;
 
   try {
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}&days=5`;
 
-    const weatherResponse = axios.get(url);
+    const weatherResponse = await axios.get(url);
+    console.log(weatherResponse.data);
     const weatherArr = weatherResponse.data.data.map(day => new Forecast(day));
     response.status(200).send(weatherArr);
   } catch (error) {
@@ -31,13 +32,13 @@ function getWeather(request, response) {
   }
 }
 
-// app.get('/movies', async (request, response) => {
-//   let searchQuery = request.query.searchQuery;
-//   const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchQuery}`;
-//   const movieData = await axios.get(url);
-//   const movieArr = movieData.data.results.map(movie => new Movie(movie));
-//   response.status(200).send(movieArr);
-// })
+app.get('/movies', async (request, response) => {
+  let searchQuery = request.query.searchQuery;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchQuery}`;
+  const movieData = await axios.get(url);
+  const movieArr = movieData.data.results.map(movie => new Movie(movie));
+  response.status(200).send(movieArr);
+})
 
 function handleError(error, response) {
   console.log(error);
