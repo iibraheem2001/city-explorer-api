@@ -38,7 +38,7 @@ app.get('/movies', async (request, response) => {
   const movieData = await axios.get(url);
   const movieArr = movieData.data.results.map(movie => new Movie(movie));
   response.status(200).send(movieArr);
-})
+});
 
 function handleError(error, response) {
   console.log(error);
