@@ -9,4 +9,4 @@ class Forecast {
   }
 }
 
-module.exports = Forecast
+module.exports = Forecast;
