@@ -13,7 +13,7 @@ const movieHandler = require('./handlers/movies.js');
 const PORT = process.env.PORT || 3002;
 
 app.get('/', (request, response) => {
-  response.send('Your Server Is Running, Jennay!');
+  response.send('Your Server Is Running!');
 });
 
 app.get('/weather', weatherHandler.getWeather);
